@@ -3,10 +3,8 @@ import "dotenv/config";
 import keplerGlReducer from "kepler.gl/reducers";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { taskMiddleware } from "react-palm/tasks";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import KeplerGl from "kepler.gl";
-import { addDataToMap } from "kepler.gl/actions";
-import useSwr from "swr";
 require("dotenv").config();
 
 const reducers = combineReducers({
