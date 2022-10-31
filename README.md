@@ -1,6 +1,21 @@
-# Kepler Demo
+# Kepler React 3D Map
 
-- Video: https://youtu.be/BEZjt08Myxs
-- Kepler: https://kepler.gl/
-- Demo: https://keplergl-demo.netlify.com/
-- Data source: https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
+Implementation of Kepler.gl library with React to render 3D maps
+
+## Installation
+
+Install my-project with npm
+
+```bash
+  git clone https://github.com/rabira-hierpa/react-3d-map
+  cd react-3d-map
+  npm install
+```
+
+## Acknowledgements
+
+- [LostnAustin](https://github.com/LostnAustin/)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
