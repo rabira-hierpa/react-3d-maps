@@ -60,6 +60,7 @@ function Map() {
 
   React.useEffect(() => {
     dispatch(togglePerspective());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
