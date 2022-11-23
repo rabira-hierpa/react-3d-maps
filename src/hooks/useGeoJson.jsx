@@ -1,21 +1,24 @@
 import { processGeojson } from "kepler.gl/processors";
 
-export const datasetWrapper = (label, data) => ({
-  datasets: {
-    info: {
-      label: label,
-      id: String(label).trim(),
+export const datasetWrapper = (label, data, config) => {
+  const _dataId = `${String(label).toLowerCase().trim()}_dataId`;
+  return {
+    datasets: {
+      info: {
+        label: label,
+        id: _dataId,
+      },
+      data,
     },
-    data,
-  },
-  option: {
-    centerMap: true,
-    readOnly: false,
-  },
-  config: {},
-});
+    option: {
+      centerMap: true,
+      readOnly: false,
+    },
+    config,
+  };
+};
 
-const fetchGeoJson = async (label, url) => {
+const useFetchGeoJson = async (label, url) => {
   try {
     const response = await fetch(url);
     const json = await response.json();
@@ -26,4 +29,4 @@ const fetchGeoJson = async (label, url) => {
     throw new Error(error);
   }
 };
-export default fetchGeoJson;
+export default useFetchGeoJson;

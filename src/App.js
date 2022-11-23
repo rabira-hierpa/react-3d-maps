@@ -10,9 +10,10 @@ import { addDataToMap } from "kepler.gl/actions";
 import { useDispatch } from "react-redux";
 import { handleActions } from "redux-actions";
 import { routerReducer } from "react-router-redux";
-import { processCsvData, processGeojson } from "kepler.gl/processors";
+import { processGeojson } from "kepler.gl/processors";
 import { datasetWrapper } from "./hooks/useGeoJson";
 import { togglePerspective } from "kepler.gl/actions";
+import { mapLayerConfig } from "./utils/layerConfig";
 require("dotenv").config();
 
 const initialAppState = {
@@ -33,29 +34,11 @@ function Map() {
 
   const buildingData = useSWR("buildings", async () => {
     const response = await fetch(
-      "https://raw.githubusercontent.com/rabira-hierpa/react-3d-maps/main/data/Building_noZ.geojson"
+      "https://raw.githubusercontent.com/maptime-ams/geojson-3d/gh-pages/data/buildings.json"
     );
     let buildingData = await response.json();
     buildingData = processGeojson(buildingData);
     return buildingData;
-  });
-
-  const workAreaData = useSWR("workAreas", async () => {
-    const response = await fetch(
-      "https://raw.githubusercontent.com/rabira-hierpa/react-3d-maps/main/data/WorkAreas_WGS84.geojson"
-    );
-    let workAreaData = await response.json();
-    workAreaData = processGeojson(workAreaData);
-    return workAreaData;
-  });
-
-  const facedPoints = useSWR("workAreas", async () => {
-    const response = await fetch(
-      "https://raw.githubusercontent.com/rabira-hierpa/react-3d-maps/main/data/facadePoints_WGS84.csv"
-    );
-    let facedPoints = await response.json();
-    facedPoints = processCsvData(facedPoints);
-    return facedPoints;
   });
 
   React.useEffect(() => {
@@ -65,15 +48,13 @@ function Map() {
 
   React.useEffect(() => {
     if (buildingData.data) {
-      dispatch(addDataToMap(datasetWrapper("Buildings", buildingData.data)));
+      dispatch(
+        addDataToMap(
+          datasetWrapper("Buildings", buildingData.data, mapLayerConfig)
+        )
+      );
     }
-    if (workAreaData.data) {
-      dispatch(addDataToMap(datasetWrapper("Work Area", workAreaData.data)));
-    }
-    if (facedPoints.data) {
-      dispatch(addDataToMap(datasetWrapper("Faced Points", facedPoints.data)));
-    }
-  }, [dispatch, buildingData.data, workAreaData.data, facedPoints.data]);
+  }, [dispatch, buildingData.data]);
 
   return (
     <KeplerGl
