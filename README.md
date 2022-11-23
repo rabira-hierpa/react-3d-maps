@@ -1,5 +1,7 @@
 # Kepler React 3D Map
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0597e593-adc6-4e93-af3b-cc01d7a0fb26/deploy-status)](https://app.netlify.com/sites/react-3d-maps/deploys)
+
 Implementation of Kepler.gl library with React to render 3D maps
 
 ## Installation
